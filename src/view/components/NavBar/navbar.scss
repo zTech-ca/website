@@ -24,6 +24,13 @@
       list-style-type: none;
       display: flex;
     }
+
+    div {
+      display: flex;
+      .nav-spacer {
+        opacity: 0.3;
+      }
+    }
   }
 
   .nav-bar-right {
@@ -34,12 +41,14 @@
 
 .nav-button {
   margin: auto 0;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold;
   border-radius: 5px;
   padding: 0 5px;
   height: 35px;
   line-height: 35px;
-  transition: 0.3s;
+  transition: 0.1s;
+  user-select: none;
   cursor: pointer;
   &:hover {
     background-color: #1f4bcf;

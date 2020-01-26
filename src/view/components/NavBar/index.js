@@ -13,21 +13,31 @@ export default class NavBar extends React.Component {
   getPageItems() {
     return (
       <ul className="page-list">
-        {Object.keys(pageList).map(item => {
+        {Object.keys(pageList).map((item, index) => {
           return (
-            <li
-              key={item}
-              className="nav-button"
-              onClick={() => {
-                console.log("Let us run the script");
-              }}
-            >
-              {pageList[item].display}
-            </li>
+            <div key={item}>
+              {index > 0 && <span className="nav-spacer">|</span>}
+              <li
+                className="nav-button"
+                onClick={() => {
+                  console.log("Let us run the script");
+                }}
+              >
+                {pageList[item].display}
+              </li>
+            </div>
           );
         })}
       </ul>
     );
+  }
+
+  contactRequested() {
+    console.log("now start contacting us");
+  }
+
+  loginClicked() {
+    console.log("clicked the login button");
   }
 
   render() {
@@ -46,10 +56,15 @@ export default class NavBar extends React.Component {
             {this.getPageItems()}
           </div>
           <div className="nav-bar-right">
-            <div className="nav-button">Login</div>
+            <div onClick={this.loginClicked} className="nav-button">
+              Login
+            </div>
+            <div onClick={this.contactRequested} className="nav-button">
+              Contact Us
+            </div>
           </div>
         </div>
-        <div id="nav-spacer"></div>
+        <div id="nav-spacer" />
       </>
     );
   }
