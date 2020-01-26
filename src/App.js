@@ -4,6 +4,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import store from "./store";
 import NavBar from "./view/components/NavBar";
 import Home from "./view/pages/Home";
+import AboutUs from "./view/pages/AboutUs";
+import Estimate from "./view/pages/Estimate";
 
 export default class App extends React.Component {
   constructor() {
@@ -20,6 +22,8 @@ export default class App extends React.Component {
         <NavBar />
         <BrowserRouter>
           <Route path="/" exact component={Home} />
+          <Route path="/aboutus" exact component={AboutUs} />
+          <Route path="/estimate" exact component={Estimate} />
         </BrowserRouter>
       </Provider>
     );

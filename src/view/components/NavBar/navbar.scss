@@ -1,0 +1,47 @@
+#nav-spacer {
+  height: 50px;
+}
+
+#nav-bar {
+  position: fixed;
+  width: 100%;
+  background-color: #0066ff;
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  justify-content: space-between;
+
+  .nav-bar-left {
+    display: flex;
+
+    .nav-menu-icon {
+      margin: auto 2px;
+    }
+
+    .page-list {
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      display: flex;
+    }
+  }
+
+  .nav-bar-right {
+    display: flex;
+    margin-right: 10px;
+  }
+}
+
+.nav-button {
+  margin: auto 0;
+  font-family: "Times New Roman", Times, serif;
+  border-radius: 5px;
+  padding: 0 5px;
+  height: 35px;
+  line-height: 35px;
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    background-color: #1f4bcf;
+  }
+}
