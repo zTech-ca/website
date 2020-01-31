@@ -37,6 +37,7 @@ class Modal extends React.Component {
           <button className="modal-close" onClick={this.props.hideModal}>
             &times;
           </button>
+          <p>Connect netlify</p>
         </div>
       </div>
     );
