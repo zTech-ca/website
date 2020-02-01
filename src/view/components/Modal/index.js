@@ -1,51 +1,43 @@
-import React from "react";
-import "./modal.scss";
-import { connect } from "react-redux";
+import React, {useEffect, useRef} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { hideModal } from "../../../actions/modalActions";
+import { CONTACT, LOGIN } from '../../../constants/modalModes'
+import Contact from './Contact'
+import Login from './Login'
+import "./modal.scss";
 
-class Modal extends React.Component {
-  constructor() {
-    super();
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-  }
 
-  componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
-  }
+export default function Modal () {
 
-  componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
-  }
+  const mode = useSelector(state => state.modal)
+  const dispatch = useDispatch()
+  const ref = useRef(null)
 
-  setWrapperRef(node) {
-    this.wrapperRef = node;
-  }
-
-  handleClickOutside(event) {
-    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
-      this.props.hideModal();
+  useEffect(() => {
+    document.addEventListener('click', handleClick)
+    return () => {
+      document.removeEventListener('click', handleClick)
     }
+  })
+
+  function handleClick (event) {
+    if (ref.current && !ref.current.contains(event.target)) {
+      handleClickOutside()
+  }}
+
+  function handleClickOutside () {
+    dispatch(hideModal())
   }
-
-  render() {
-    if (!this.props.modal) return null;
-
-    return (
-      <div id="modal">
-        <div id="modal-content" ref={this.setWrapperRef}>
-          <button className="modal-close" onClick={this.props.hideModal}>
-            &times;
-          </button>
-          <p>Connect netlify</p>
-        </div>
+  
+  return (
+    <div id="modal">
+      <div id="modal-content" ref={ref}>
+        <button className="modal-close" onClick={handleClickOutside}>
+          &times;
+        </button>
+        {mode === CONTACT && <Contact />}
+        {mode === LOGIN && <Login />}
       </div>
-    );
-  }
+    </div>
+  );
 }
-
-const mapStateToProps = state => ({
-  modal: state.modal.mode
-});
-
-export default connect(mapStateToProps, { hideModal })(Modal);

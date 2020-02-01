@@ -1,6 +1,8 @@
 import React from "react";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
+import { useDispatch } from 'react-redux';
+import { openContactModal, openLoginModal } from '../../../actions/navActions'
 import "./navbar.scss";
 
 const pageList = {
@@ -9,8 +11,11 @@ const pageList = {
   Estimate: { display: "Get your quote", path: "" }
 };
 
-export default class NavBar extends React.Component {
-  getPageItems() {
+export default function NavBar () {
+
+  const dispatch = useDispatch()
+
+  function getPageItems() {
     return (
       <ul className="page-list">
         {Object.keys(pageList).map((item, index) => {
@@ -32,92 +37,30 @@ export default class NavBar extends React.Component {
     );
   }
 
-  contactRequested() {
-    console.log("now start contacting us");
-  }
-
-  loginClicked() {
-    console.log("clicked the login button");
-  }
-
-  render() {
-    return (
-      <>
-        <div id="nav-bar">
-          <div className="nav-bar-left">
-            <IconButton
-              edge="start"
-              className="nav-menu-icon"
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            {this.getPageItems()}
+  return (
+    <>
+      <div id="nav-bar">
+        <div className="nav-bar-left">
+          <IconButton
+            edge="start"
+            className="nav-menu-icon"
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          {getPageItems()}
+        </div>
+        <div className="nav-bar-right">
+          <div onClick={() => dispatch(openLoginModal())} className="nav-button">
+            Login
           </div>
-          <div className="nav-bar-right">
-            <div onClick={this.loginClicked} className="nav-button">
-              Login
-            </div>
-            <div onClick={this.contactRequested} className="nav-button">
-              Contact Us
-            </div>
+          <div onClick={() => dispatch(openContactModal())} className="nav-button">
+            Contact Us
           </div>
         </div>
-        <div id="nav-spacer" />
-      </>
-    );
-  }
+      </div>
+      <div id="nav-spacer" />
+    </>
+  );
 }
-
-// import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-// import AppBar from "@material-ui/core/AppBar";
-// import Toolbar from "@material-ui/core/Toolbar";
-// import Typography from "@material-ui/core/Typography";
-// import Button from "@material-ui/core/Button";
-// import IconButton from "@material-ui/core/IconButton";
-// import MenuIcon from "@material-ui/icons/Menu";
-
-// const useStyles = makeStyles(theme => ({
-//   root: {
-//     flexGrow: 1
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2)
-//   },
-//   title: {
-//     flexGrow: 1
-//   }
-// }));
-
-// export default function NavBar() {
-//   const classes = useStyles();
-
-//   return (
-//     <div className={classes.root}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <IconButton
-//             edge="start"
-//             className={classes.menuButton}
-//             color="inherit"
-//             aria-label="menu"
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant="h6" className={classes.title}>
-//             Home
-//           </Typography>
-//           <Typography variant="h6" className={classes.title}>
-//             About Us
-//           </Typography>
-//           <Typography variant="h6" className={classes.title}>
-//             About Us
-//           </Typography>
-//           <Button color="inherit">Login</Button>
-//         </Toolbar>
-//       </AppBar>
-//     </div>
-//   );
-// }
