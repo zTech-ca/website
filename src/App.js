@@ -1,35 +1,28 @@
 import React from "react";
-import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
-import store from "./store";
 import NavBar from "./view/components/NavBar";
 import Footer from "./view/components/Footer";
 import Home from "./view/pages/Home";
 import AboutUs from "./view/pages/AboutUs";
 import Estimate from "./view/pages/Estimate";
 import Modal from "./view/components/Modal";
+import { useSelector } from "react-redux"
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-    console.log("Starting the entire app...");
-    console.log(
-      "Here, the app should start making api call to check for use regsitration etc."
-    );
-  }
+export default function App () {
 
-  render() {
-    return (
-      <Provider store={store}>
-        <NavBar />
-        <Modal />
-        <BrowserRouter>
-          <Route path="/" exact component={Home} />
-          <Route path="/aboutus" exact component={AboutUs} />
-          <Route path="/estimate" exact component={Estimate} />
-        </BrowserRouter>
-        <Footer />
-      </Provider>
-    );
-  }
+  const mode = useSelector(state => state.modal)
+
+  return (
+    <div>
+      <NavBar />
+      {mode && <Modal />}
+      <BrowserRouter>
+        <Route path="/" exact component={Home} />
+        <Route path="/aboutus" exact component={AboutUs} />
+        <Route path="/estimate" exact component={Estimate} />
+      </BrowserRouter>
+      <Footer />
+    </div>
+  );
+
 }

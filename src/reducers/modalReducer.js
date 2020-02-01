@@ -1,13 +1,16 @@
-import { MODAL_OFF } from "../actions/types";
+import { MODAL_OFF, MODAL_CONTACT, MODAL_LOGIN } from "../actions/types";
+import { CONTACT, LOGIN } from '../constants/modalModes'
 
-const initialState = {
-  mode: true
-};
+const initialState = null
 
 const modalReducer = (state = initialState, action) => {
   switch (action.type) {
     case MODAL_OFF:
-      return { ...state, mode: null };
+      return null;
+    case MODAL_CONTACT:
+      return CONTACT
+    case MODAL_LOGIN:
+      return LOGIN
     default:
       return state;
   }
